@@ -74,14 +74,18 @@ export class WorkspaceDomainsService {
 
     if (workspaces.length > 1) {
       Logger.warn(
-        ` ${workspaces.length} workspaces found in database. In single-workspace mode, there should be only one workspace. Apple seed workspace will be used as fallback if it found.`,
+        `${workspaces.length} workspaces found in database. In single-workspace mode, there should be only one workspace. The Apple seed workspace will be used as fallback if present.`,
       );
     }
 
-    // use Apple seed workspace by default if present when there are more than one workspaces.
+    // Prefer the Apple seed workspace when multiple workspaces exist (e.g. after a full
+    // dev seed that creates Apple + YCombinator + Empty3 + Empty4) so the default user
+    // `tim@apple.dev` lands on a workspace they belong to. Falls back to the most
+    // recently created workspace otherwise.
     const foundWorkspace =
-      workspaces.find((ws) => ws.id === SEED_APPLE_WORKSPACE_ID) ??
-      workspaces[0];
+      workspaces.find(
+        (workspace) => workspace.id === SEED_APPLE_WORKSPACE_ID,
+      ) ?? workspaces[0];
 
     assertIsDefinedOrThrow(foundWorkspace, WorkspaceNotFoundDefaultError);
 
