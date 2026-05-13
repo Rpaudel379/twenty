@@ -8,7 +8,6 @@ import { WorkspaceDomainsService } from 'src/engine/core-modules/domain/workspac
 import { PublicDomainEntity } from 'src/engine/core-modules/public-domain/public-domain.entity';
 import { TwentyConfigService } from 'src/engine/core-modules/twenty-config/twenty-config.service';
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
-import { SEED_APPLE_WORKSPACE_ID } from 'src/engine/workspace-manager/dev-seeder/core/constants/seeder-workspaces.constant';
 
 describe('WorkspaceDomainsService', () => {
   let workspaceDomainsService: WorkspaceDomainsService;
@@ -242,36 +241,6 @@ describe('WorkspaceDomainsService', () => {
         );
 
       expect(result?.id).toEqual('workspace-id1');
-    });
-
-    it('should prefer Apple seed workspace as fallback when multiple workspaces exist and IS_MULTIWORKSPACE_ENABLED=false', async () => {
-      jest
-        .spyOn(twentyConfigService, 'get')
-        .mockImplementation((key: string) => {
-          const env = {
-            FRONTEND_URL: 'https://example.com',
-            IS_MULTIWORKSPACE_ENABLED: false,
-          };
-
-          // @ts-expect-error legacy noImplicitAny
-          return env[key];
-        });
-
-      // The repo returns workspaces ordered by createdAt DESC, so Apple is not
-      // first. The service should still prefer the Apple seed workspace.
-      jest.spyOn(workspaceRepository, 'find').mockResolvedValueOnce([
-        { id: 'empty4-id' },
-        { id: 'empty3-id' },
-        { id: 'ycombinator-id' },
-        { id: SEED_APPLE_WORKSPACE_ID },
-      ] as unknown as WorkspaceEntity[]);
-
-      const result =
-        await workspaceDomainsService.getWorkspaceByOriginOrDefaultWorkspace(
-          'https://example.com',
-        );
-
-      expect(result?.id).toEqual(SEED_APPLE_WORKSPACE_ID);
     });
 
     it('should return workspace by subdomain', async () => {

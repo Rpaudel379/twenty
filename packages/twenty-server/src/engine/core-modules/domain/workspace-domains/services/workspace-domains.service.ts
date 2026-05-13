@@ -78,10 +78,6 @@ export class WorkspaceDomainsService {
       );
     }
 
-    // Prefer the Apple seed workspace when multiple workspaces exist (e.g. after a full
-    // dev seed that creates Apple + YCombinator + Empty3 + Empty4) so the default user
-    // `tim@apple.dev` lands on a workspace they belong to. Falls back to the most
-    // recently created workspace otherwise.
     const foundWorkspace =
       workspaces.find(
         (workspace) => workspace.id === SEED_APPLE_WORKSPACE_ID,
