@@ -184,7 +184,15 @@
           "label": "Self-Host"
         },
         "contribute": {
-          "label": "Contribute"
+          "label": "Contribute",
+          "groups": {
+            "frontendDevelopment": {
+              "label": "Frontend Development"
+            },
+            "backendDevelopment": {
+              "label": "Backend Development"
+            }
+          }
         }
       }
     }

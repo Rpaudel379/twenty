@@ -475,7 +475,33 @@
           "pages": [
             "developers/contribute/capabilities/local-setup",
             "developers/contribute/commands",
-            "developers/contribute/style-guide"
+            "developers/contribute/style-guide",
+            "developers/contribute/capabilities/bug-and-requests",
+            {
+              "key": "frontendDevelopment",
+              "label": "Frontend Development",
+              "pages": [
+                "developers/contribute/capabilities/frontend-development/best-practices-front",
+                "developers/contribute/capabilities/frontend-development/folder-architecture-front",
+                "developers/contribute/capabilities/frontend-development/frontend-commands",
+                "developers/contribute/capabilities/frontend-development/hotkeys",
+                "developers/contribute/capabilities/frontend-development/storybook",
+                "developers/contribute/capabilities/frontend-development/style-guide"
+              ]
+            },
+            {
+              "key": "backendDevelopment",
+              "label": "Backend Development",
+              "pages": [
+                "developers/contribute/capabilities/backend-development/best-practices-server",
+                "developers/contribute/capabilities/backend-development/custom-objects",
+                "developers/contribute/capabilities/backend-development/feature-flags",
+                "developers/contribute/capabilities/backend-development/folder-architecture-server",
+                "developers/contribute/capabilities/backend-development/queue",
+                "developers/contribute/capabilities/backend-development/server-commands",
+                "developers/contribute/capabilities/backend-development/zapier"
+              ]
+            }
           ]
         }
       ]
